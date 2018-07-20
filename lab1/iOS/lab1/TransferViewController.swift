@@ -49,7 +49,7 @@ class TransferViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             "to": toCid,
             "amount": self.amount.text!
         ];
-        Alamofire.request("http://localhost:5000/lab1/transfer", method: .post, parameters: params)
+        Alamofire.request("https://appseclabs.ru/lab1/transfer", method: .post, parameters: params)
             .responseJSON { response in
                 if let result = response.result.value {
                     let json = result as! NSDictionary
@@ -71,7 +71,7 @@ class TransferViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         self.amount.text = ""
         
         let params: [String: String] = ["token": self.token];
-        Alamofire.request("http://localhost:5000/lab1/info", method: .post, parameters: params)
+        Alamofire.request("https://appseclabs.ru/lab1/info", method: .post, parameters: params)
             .responseJSON { response in
                 if let result = response.result.value {
                     let json = result as! NSDictionary
