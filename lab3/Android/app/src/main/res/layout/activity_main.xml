@@ -14,7 +14,7 @@
         android:textAlignment="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="http://172.31.131.138:5000"/>
+        android:text="https://appseclabs.ru"/>
 
     <EditText
         android:id="@+id/login"

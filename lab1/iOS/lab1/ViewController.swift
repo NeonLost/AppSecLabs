@@ -30,7 +30,7 @@ class ViewController: UIViewController {
         self.status.text = ""
         
         let params: [String: String] = ["login": self.login.text!, "password": self.password.text!];
-        Alamofire.request("http://localhost:5000/lab1/auth", method: .post, parameters: params)
+        Alamofire.request("https://appseclabs.ru/lab1/auth", method: .post, parameters: params)
             .responseJSON { response in
                 if let result = response.result.value {
                     let json = result as! NSDictionary
