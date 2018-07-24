@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+	<title>Lab4</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
+	<style type="text/css">
+		input {
+			margin-top: 10px;
+		}
+		button {
+			margin-top: 10px;
+		}
+	</style>
+</head>
+<body>
+
+<div class="row" style="margin-top: 50px; margin-bottom: 150px;">
+	<div class="col-md-4"></div>
+	<div class="col-md-4">
+		<h1>WELCOME TO APPSEC LAB 4</h1>
+	</div>
+	<div class="col-md-4"></div>
+</div>
+
+<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-4">
+		
+		<form class="form-signin">
+			<h1 class="h3 mb-3 font-weight-normal">Войти</h1>
+			<label for="inputLogin" class="sr-only">Login</label>
+			<input name="login" type="login" id="inputLogin" class="form-control" placeholder="Login" required autofocus>
+			<label for="inputPassword" class="sr-only">Password</label>
+			<input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+      		<button class="btn btn-lg btn-primary btn-block" id="singin" type="submit">Войти</button>
+		</form>
+
+	</div>
+
+	<div class="col-md-1"></div>
+
+	<div class="col-md-4">
+		<form class="form-signin">
+			<h1 class="h3 mb-3 font-weight-normal">Зарегистрироваться</h1>
+			<label for="inputLoginSignUp" class="sr-only">Login</label>
+			<input name="login" type="login" id="inputLoginSignUp" class="form-control" placeholder="Login" required autofocus>
+			<label for="inputPasswordSignUp" class="sr-only">Password</label>
+			<input name="password" type="password" id="inputPasswordSignUp" class="form-control" placeholder="Password" required>
+      		<button class="btn btn-lg btn-primary btn-block" id="singup" type="submit">Зарегистрироваться</button>
+		</form>
+	</div>
+
+	<div class="col-md-1"></div>
+
+</div>
+
+<div class="row" style="margin-top: 50px;">
+	<div class="col-md-4"></div>
+	
+	<div class="col-md-4">
+		<div id="datafromApi" style="font-size: 30px;">
+			
+		</div>
+	</div>
+	
+	<div class="col-md-4"></div>
+</div>
+
+
+<script type="text/javascript">
+	function log(some) {
+		document.getElementById('datafromApi').innerText += some + '\n';
+	}
+
+	function clear() {
+		document.getElementById('datafromApi').innerText = '';
+	}
+
+
+	$("#singin").click(function(e) {
+	    e.preventDefault();
+	    $.ajax({
+	        type: "POST",
+	        url: "https://appseclabs.ru/lab4/auth",
+	        data: { 
+	            login: $("#inputLogin").val(),
+	            password: $("#inputPassword").val() 
+	        },
+	        success: function(result) {
+	        	clear();
+	            Object.keys(result).forEach(function(key) {
+					log(key + ' = ' + result[key]);
+				});
+	        },
+	        error: function(result) {
+	        	clear();
+	            log('error');
+	        }
+	    });
+	});
+
+	$("#singup").click(function(e) {
+	    e.preventDefault();
+	    $.ajax({
+	        type: "POST",
+	        url: "https://appseclabs.ru/lab4/reg",
+	        data: { 
+	            login: $("#inputLoginSignUp").val(),
+	            password: $("#inputPasswordSignUp").val() 
+	        },
+	        success: function(result) {
+	        	clear();
+	            Object.keys(result).forEach(function(key) {
+					log(key + ' = ' + result[key]);
+				});
+	        },
+	        error: function(result) {
+	        	clear();
+	            log('error');
+	        }
+	    });
+	});
+</script>
+
+</body>
+</html>
