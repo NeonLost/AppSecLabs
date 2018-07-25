@@ -14,6 +14,12 @@
 		button {
 			margin-top: 10px;
 		}
+		.red{
+			color: red;
+		}
+		.green{
+			color: green;
+		}
 	</style>
 </head>
 <body>
@@ -31,26 +37,26 @@
 	<div class="col-md-4">
 		
 		<form class="form-signin">
-			<h1 class="h3 mb-3 font-weight-normal">Войти</h1>
+			<h1 class="h3 mb-3 font-weight-normal">Sign In</h1>
 			<label for="inputLogin" class="sr-only">Login</label>
 			<input name="login" type="login" id="inputLogin" class="form-control" placeholder="Login" required autofocus>
 			<label for="inputPassword" class="sr-only">Password</label>
 			<input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-      		<button class="btn btn-lg btn-primary btn-block" id="singin" type="submit">Войти</button>
+      		<button class="btn btn-lg btn-primary btn-block" id="singin" type="submit">Sign In</button>
 		</form>
 
 	</div>
 
-	<div class="col-md-1"></div>
+	<div class="col-md-2"></div>
 
 	<div class="col-md-4">
 		<form class="form-signin">
-			<h1 class="h3 mb-3 font-weight-normal">Зарегистрироваться</h1>
+			<h1 class="h3 mb-3 font-weight-normal">Sign Up</h1>
 			<label for="inputLoginSignUp" class="sr-only">Login</label>
 			<input name="login" type="login" id="inputLoginSignUp" class="form-control" placeholder="Login" required autofocus>
 			<label for="inputPasswordSignUp" class="sr-only">Password</label>
 			<input name="password" type="password" id="inputPasswordSignUp" class="form-control" placeholder="Password" required>
-      		<button class="btn btn-lg btn-primary btn-block" id="singup" type="submit">Зарегистрироваться</button>
+      		<button class="btn btn-lg btn-primary btn-block" id="singup" type="submit">Create an account</button>
 		</form>
 	</div>
 
@@ -72,8 +78,9 @@
 
 
 <script type="text/javascript">
-	function log(some) {
+	function log(some, color) {
 		document.getElementById('datafromApi').innerText += some + '\n';
+		document.getElementById('datafromApi').className = color;
 	}
 
 	function clear() {
@@ -92,13 +99,15 @@
 	        },
 	        success: function(result) {
 	        	clear();
-	            Object.keys(result).forEach(function(key) {
-					log(key + ' = ' + result[key]);
-				});
+	            if (result['login'] && result['role']) {
+	        		log('Hello ' + result['login'] + ', your role: ' + result['role'], 'green')
+	        	} else if (result['error']) {
+	        		log('Error:  ' + result['error'], 'red')
+	        	}
 	        },
 	        error: function(result) {
 	        	clear();
-	            log('error');
+	            log('error', 'red');
 	        }
 	    });
 	});
@@ -114,13 +123,15 @@
 	        },
 	        success: function(result) {
 	        	clear();
-	            Object.keys(result).forEach(function(key) {
-					log(key + ' = ' + result[key]);
-				});
+	            if (result['status'] && result['status'] == 'ok') {
+	        		log('Success register new user', 'green')
+	        	} else if (result['error']) {
+	        		log('Error:  ' + result['error'], 'red')
+	        	}
 	        },
 	        error: function(result) {
 	        	clear();
-	            log('error');
+	            log('error', 'red');
 	        }
 	    });
 	});
