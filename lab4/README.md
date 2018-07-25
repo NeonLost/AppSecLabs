@@ -1,6 +1,7 @@
 # Improper Neutralization of CRLF Sequences ('CRLF Injection')
 
-This lab shows how to easy achieve unexpected behavior. The software receives input from an upstream component, but it does not neutralize or incorrectly neutralizes special elements that could be interpreted as line delimiters when they are sent to a downstream component.
+This lab shows how to easy return to 2000th, when databases were used not everywhere to store data. 
+The software get user input, but does't sanitize it or sanitizes incorrectly. Special chars can be interpreted as line delimiters when they are sent to a internal component.
 
 ## Core idea
-You have single account **`jdoe:1234`**. You must log in with admin privileges and capture the flag.
+You have single account **`jdoe:1234`**. You have to log in with admin privileges and capture the flag.
