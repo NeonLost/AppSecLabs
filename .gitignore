@@ -162,5 +162,5 @@ fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
 
-# lab5 sources
-lab5/Android
+# private key
+backend/private.pem
