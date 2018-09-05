@@ -6,7 +6,7 @@ from flask import Blueprint, jsonify, request
 sql_injection_2 = Blueprint('sql_injection_2', __name__)
 
 
-@sql_injection_2.route('/challenge/sql_injection_2/auth', methods=['GET', 'POST'])
+@sql_injection_2.route('/labs/sql_injection_2/auth', methods=['GET', 'POST'])
 def auth():
     try:
         login = request.values.get('login')

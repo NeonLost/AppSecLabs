@@ -19,7 +19,7 @@ users = {}
 tokens = {}
 
 
-@improper_input_validation_1.route('/challenge/improper_input_validation_1/reg', methods=['GET', 'POST'])
+@improper_input_validation_1.route('/labs/improper_input_validation_1/reg', methods=['GET', 'POST'])
 def register():
     try:
         login = request.values.get('login')
@@ -35,7 +35,7 @@ def register():
         return jsonify({'error': 'Unable to register new user'})
 
 
-@improper_input_validation_1.route('/challenge/improper_input_validation_1/auth', methods=['GET', 'POST'])
+@improper_input_validation_1.route('/labs/improper_input_validation_1/auth', methods=['GET', 'POST'])
 def auth():
     login = request.values.get('login')
     password = request.values.get('password')
@@ -49,7 +49,7 @@ def auth():
         return jsonify({'error': 'Invalid credentials'})
 
 
-@improper_input_validation_1.route('/challenge/improper_input_validation_1/info', methods=['GET', 'POST'])
+@improper_input_validation_1.route('/labs/improper_input_validation_1/info', methods=['GET', 'POST'])
 def info():
     token = request.values.get('token')
     login = tokens.get(token)
@@ -75,7 +75,7 @@ def info():
         return jsonify({'error': 'Access denied'})
 
 
-@improper_input_validation_1.route('/challenge/improper_input_validation_1/transfer', methods=['GET', 'POST'])
+@improper_input_validation_1.route('/labs/improper_input_validation_1/transfer', methods=['GET', 'POST'])
 def transfer():
     token = request.values.get('token')
     to_login = request.values.get('to')

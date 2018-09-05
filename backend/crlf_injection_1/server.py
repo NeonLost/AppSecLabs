@@ -7,7 +7,7 @@ crlf_injection_1 = Blueprint('crlf_injection_1', __name__)
 users_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'users.txt')
 
 
-@crlf_injection_1.route('/challenge/crlf_injection_1/auth', methods=['GET', 'POST'])
+@crlf_injection_1.route('/labs/crlf_injection_1/auth', methods=['GET', 'POST'])
 def auth():
     try:
         login = request.values.get('login')
@@ -25,7 +25,7 @@ def auth():
         return jsonify({'error': 'Invalid credentials'})
 
 
-@crlf_injection_1.route('/challenge/crlf_injection_1/reg', methods=['GET', 'POST'])
+@crlf_injection_1.route('/labs/crlf_injection_1/reg', methods=['GET', 'POST'])
 def register():
     try:
         login = request.values.get('login')
