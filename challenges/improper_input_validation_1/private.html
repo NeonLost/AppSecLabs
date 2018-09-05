@@ -40,8 +40,7 @@
 	<div class="col-md-4">
 		
 		<form class="form-signin">
-			<h1 class="h3 mb-3 font-weight-normal">Get info</h1>
-      		<button class="btn btn-lg btn-primary btn-block" id="info" type="submit">Info</button>
+			<h1 class="h3 mb-3 font-weight-normal">Info</h1>
 		</form>
 		<div id="cardDatafromApi" style="font-size: 30px; text-align: center;"></div>
 	</div>
@@ -79,25 +78,25 @@
 		document.getElementById(id).className = color;
 	}
 
-	function clear() {
-		document.getElementById('datafromApi').innerText = '';
+	function clear(id='datafromApi') {
+		document.getElementById(id).innerText = '';
 	}
 
-
-	$("#info").click(function(e) {
-	    e.preventDefault();
-	    $.ajax({
+	loadCardInfo();
+	function loadCardInfo() {
+		$.ajax({
 	        type: "POST",
 	        url: "https://appseclabs.ru/labs/improper_input_validation_1/info",
 	        data: { 
 	            token: localStorage.getItem('token')
 	        },
 	        success: function(result) {
-	        	clear();
+	        	clear('cardDatafromApi')
+	        	clear()
 	            if (result['info']) {
 	        		log('debit: ' + result['info']['debit']['pan'] + ' amount: ' + result['info']['debit']['amount'], 'green', 'cardDatafromApi')
-	        		if (result['flag']) {
-	        			log('debit: ' + result['info']['debit']['pan'] + ' amount: ' + result['info']['debit']['amount'] + ' flag: ' + result['info']['flag'], 'green')
+	        		if (result['info']['flag']) {
+	        			log('flag: ' + result['info']['flag'])
 	        		}
 	        	} else if (result['error']) {
 	        		log('Error:  ' + result['error'], 'red')
@@ -108,7 +107,8 @@
 	            log('error', 'red');
 	        }
 	    });
-	});
+	}
+
 
 	$("#transfer").click(function(e) {
 	    e.preventDefault();
@@ -124,6 +124,7 @@
 	        	clear();
 	            if (result['info']) {
 	        		log('Success')
+	        		loadCardInfo()
 	        	} else {
 	        		log('Error: ' + result['error'], 'red')
 	        	}
