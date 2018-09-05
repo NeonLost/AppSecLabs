@@ -2,7 +2,7 @@
 <html>
 <meta charset="utf-8">
 <head>
-	<title>CRLF</title>
+	<title>SQL Injection</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" crossorigin="anonymous"></script>
@@ -33,9 +33,8 @@
 </div>
 
 <div class="row">
-	<div class="col-md-1"></div>
+	<div class="col-md-4"></div>
 	<div class="col-md-4">
-		
 		<form class="form-signin">
 			<h1 class="h3 mb-3 font-weight-normal">Sign In</h1>
 			<label for="inputLogin" class="sr-only">Login</label>
@@ -44,24 +43,8 @@
 			<input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
       		<button class="btn btn-lg btn-primary btn-block" id="singin" type="submit">Sign In</button>
 		</form>
-
 	</div>
-
-	<div class="col-md-2"></div>
-
-	<div class="col-md-4">
-		<form class="form-signin">
-			<h1 class="h3 mb-3 font-weight-normal">Sign Up</h1>
-			<label for="inputLoginSignUp" class="sr-only">Login</label>
-			<input name="login" type="login" id="inputLoginSignUp" class="form-control" placeholder="Login" required autofocus>
-			<label for="inputPasswordSignUp" class="sr-only">Password</label>
-			<input name="password" type="password" id="inputPasswordSignUp" class="form-control" placeholder="Password" required>
-      		<button class="btn btn-lg btn-primary btn-block" id="singup" type="submit">Create an account</button>
-		</form>
-	</div>
-
-	<div class="col-md-1"></div>
-
+	<div class="col-md-4"></div>
 </div>
 
 <div class="row" style="margin-top: 50px;">
@@ -92,39 +75,15 @@
 	    e.preventDefault();
 	    $.ajax({
 	        type: "POST",
-	        url: "https://appseclabs.ru/labs/crlf_injection_1/auth",
+	        url: "https://appseclabs.ru/labs/sql_injection_1/auth",
 	        data: { 
 	            login: $("#inputLogin").val(),
 	            password: $("#inputPassword").val() 
 	        },
 	        success: function(result) {
 	        	clear();
-	            if (result['login'] && result['role']) {
-	        		log('Hello ' + result['login'] + ', your role: ' + result['role'], 'green')
-	        	} else if (result['error']) {
-	        		log('Error:  ' + result['error'], 'red')
-	        	}
-	        },
-	        error: function(result) {
-	        	clear();
-	            log('error', 'red');
-	        }
-	    });
-	});
-
-	$("#singup").click(function(e) {
-	    e.preventDefault();
-	    $.ajax({
-	        type: "POST",
-	        url: "https://appseclabs.ru/labs/crlf_injection_1/reg",
-	        data: { 
-	            login: $("#inputLoginSignUp").val(),
-	            password: $("#inputPasswordSignUp").val() 
-	        },
-	        success: function(result) {
-	        	clear();
-	            if (result['status'] && result['status'] == 'ok') {
-	        		log('Success register new user', 'green')
+	            if (result['login']) {
+	        		log('Hello ' + result['login'], 'green')
 	        	} else if (result['error']) {
 	        		log('Error:  ' + result['error'], 'red')
 	        	}
